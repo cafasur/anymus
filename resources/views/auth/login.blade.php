@@ -17,7 +17,7 @@
         </div>
         @endif
 
-        <p class="mt-3 mb-3 text-muted">&copy; 2018 Hecho con ❤ por @Dguzman</p>
+        <p class="mt-3 mb-3 text-muted">&copy; CAFASUR 2018 - Hecho con ❤ por @Dguzman</p>
     </form>
 
 @endsection

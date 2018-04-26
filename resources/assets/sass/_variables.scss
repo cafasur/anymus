@@ -9,6 +9,15 @@ $theme-colors: (
   "secondary": #fcdd09
 );
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
 .form-body {
   display: -ms-flexbox;
   display: flex;
@@ -61,13 +70,22 @@ $theme-colors: (
   z-index: 100; /* Behind the navbar */
   padding: 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  background-color: #222d32;
+}
+
+.link-sidebar{
+  color: #b8c7ce !important;
+}
+
+.link-sidebar:hover{
+  color: #fff !important;
 }
 
 .sidebar-sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 48px; /* Height of navbar */
-  height: calc(100vh - 48px);
+  height: calc(100vh - 40px);
   padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -99,15 +117,9 @@ $theme-colors: (
 .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   background-color: #00923f;
   box-shadow: inset -1px 0 0 #00923f;
-}
-
-.navbar .form-control {
-  padding: .75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
 }
 
 /*
@@ -116,3 +128,17 @@ $theme-colors: (
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+/*
+ * Sticky footer
+ */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin-left: 16%;
+  width: 84%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
