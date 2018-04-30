@@ -30,7 +30,8 @@ class AddColumsRolUnitUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropForeign('users_rol_id_foreign');
+            $table->dropForeign('users_unit_id_foreign');
         });
     }
 }

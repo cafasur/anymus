@@ -79,4 +79,10 @@ class LoginController extends Controller
             ]);
         }
     }
+
+    public function logut(Request $request){
+        Auth::logout();
+        return redirect()->route('index');
+
+    }
 }

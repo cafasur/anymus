@@ -14,6 +14,11 @@
 Route::get('/', 'Auth\LoginController@index')->name('index');
 Route::get('login', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('logout', 'Auth\LoginController@logut')->name('logout');
 
+Route::namespace('Administracion')->middleware('auth')->prefix('administracion')->name('administracion.')->group(function () {
+    Route::get('/', 'AdministracionController@index');
+    Route::resource('permission_applications', 'Permission_applicationsController');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
