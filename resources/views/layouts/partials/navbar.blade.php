@@ -6,6 +6,7 @@
             <li class="nav-item dropdown bg-primary">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cubes fa-fw"></i> Aplicaciones</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown05">
+                    <a class="dropdown-item" href="{{ route('form_ssf') }}"><i class="fa fa-file-text-o fa-fw"></i> Formato informes SSF</a>
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
@@ -17,9 +18,9 @@
             <li class="nav-item dropdown bg-primary">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gears fa-fw"></i> Configuración</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user-circle fa-fw"></i> Mi perfil</a>
+                    <!--<a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>-->
                 </div>
             </li>
             <li class="nav-item text-nowrap bg-danger">

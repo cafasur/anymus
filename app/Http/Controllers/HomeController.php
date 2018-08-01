@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.dashboard');
+        return view('layouts.dashboard',[
+            'title' => 'Inicio',
+            'subtitle' => 'Panel de control',
+            'body' => 'contenido',
+        ]);
     }
 }

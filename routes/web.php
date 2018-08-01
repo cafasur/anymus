@@ -21,4 +21,16 @@ Route::namespace('Administracion')->middleware('auth')->prefix('administracion')
     Route::resource('permission_applications', 'Permission_applicationsController');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Routes Applications
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/profile',  'ProfileController@index')->name('profile');
+    Route::put('/profile/{user}',  'ProfileController@update')->name('update.profile');
+
+    Route::get('/formato-informes-ssf',  'FormSsfController@index')->name('form_ssf');
+    Route::post('/formato-informes-ssf/getReports',  'FormSsfController@getReports')->name('form_ssf_get_reports');
+    Route::post('/formato-informes-ssf/print',  'FormSsfController@print')->name('form_ssf_print');
+});
+
+

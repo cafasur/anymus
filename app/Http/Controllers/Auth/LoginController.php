@@ -38,16 +38,16 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $userGoogle = Socialite::driver('google')->user();
-        //dd($userGoogle);
+
         if(!isset($userGoogle->user['domain'])){
             return redirect()->route('index')->withErrors([
-                'message' => '⚠ La cuenta no pertenece a CAFASUR'
+                'message' => '⚠ La cuenta '.$userGoogle->email.' no es cooporativa'
             ]);
         }
 
         if($userGoogle->user['domain'] != 'cafasur.com.co'){
             return redirect()->route('index')->withErrors([
-                'message' => '⚠ La cuenta no pertenece a CAFASUR'
+                'message' => '⚠ La cuenta '.$userGoogle->email.' no pertenece a CAFASUR'
             ]);
         }
 
@@ -71,11 +71,10 @@ class LoginController extends Controller
                 }
             }
              auth()->login($user);
-             return redirect()->
-             route('home');
+             return redirect()->route('home');
         }else{
             return redirect()->route('index')->withErrors([
-                'message' => '⚠ La cuenta no esta registrada'
+                'message' => '⚠ La cuenta no sea registrado por el administrador'
             ]);
         }
     }
@@ -83,6 +82,5 @@ class LoginController extends Controller
     public function logut(Request $request){
         Auth::logout();
         return redirect()->route('index');
-
     }
 }

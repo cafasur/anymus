@@ -14,8 +14,8 @@ class AddColumsRolUnitUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('rol_id',false,true);
-            $table->foreign('rol_id')->references('id')->on('roles');
+            $table->integer('role_id',false,true);
+            $table->foreign('role_id')->references('id')->on('roles');
 
             $table->integer('unit_id',false,true);
             $table->foreign('unit_id')->references('id')->on('units');

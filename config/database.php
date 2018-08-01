@@ -54,6 +54,20 @@ return [
             'engine' => null,
         ],
 
+        'cafasur' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_CAFSUR', '127.0.0.1'),
+            'port' => env('DB_PORT_CAFSUR', '3306'),
+            'database' => env('DB_DATABASE_CAFSUR', 'forge'),
+            'username' => env('DB_USERNAME_CAFSUR', 'forge'),
+            'password' => env('DB_PASSWORD_CAFSUR', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
