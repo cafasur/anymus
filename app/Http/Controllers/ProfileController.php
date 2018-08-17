@@ -10,6 +10,7 @@ class ProfileController extends Controller
 {
     public function index(){
         $user = User::findOrFail(auth()->user()->getAuthIdentifier());
+        $user->load('roles');
 
         return view('apps.profile', [
             'user' => $user

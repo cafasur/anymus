@@ -144,7 +144,7 @@
         methods: {
 
             submit() {
-                axios.post( '/formato-informes-ssf/print', this.reportsSelected)
+                axios.post('/formato-informes-ssf/print', this.reportsSelected)
                     .then( (res) => {
                         console.log(res.data)
                     })

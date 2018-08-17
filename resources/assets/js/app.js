@@ -16,7 +16,11 @@ window.Vue = require('vue');
  */
 
 Vue.component('form-ssf', require('./components/FormSsf.vue'));
+Vue.component('form-assign-role', require('./components/FormAssignRole.vue'));
 Vue.component('loader-pacman', require('./components/LoaderPacman.vue'));
+Vue.component('button-inactive', require('./components/ButtonInactive.vue'));
+Vue.component('button-approve', require('./components/ButtonApprove.vue'));
+Vue.component('button-check-arrival', require('./components/ButtonCheckArrival.vue'));
 
 
 const app = new Vue({

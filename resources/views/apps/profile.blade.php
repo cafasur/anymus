@@ -1,15 +1,17 @@
 @component('layouts.dashboard')
     @slot('title')
-        <i class="fa fa-user-circle fa-fw"></i> Usuarios
+        Usuarios
     @endslot
 
     @slot('subtitle')
-        Perfil del usuario
+        <i class="fa fa-user-circle fa-fw"></i> Perfil del usuario
     @endslot
 
     @slot('buttons')
         <a href="{{ route('home') }}" class="btn btn-success"><i class="fa fa-home fa-fw"></i> Inicio</a>
     @endslot
+
+    @slot('idApp',0)
 
     @slot('body')
         <picture>
@@ -54,7 +56,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="role">Rol</label>
-                    <input type="text" class="form-control" id="role" readonly value="{{ $user->role->role }}">
+                    <input type="text" class="form-control" id="role" readonly value="{{ $user->roles->first()->name }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="unit">Unidad</label>

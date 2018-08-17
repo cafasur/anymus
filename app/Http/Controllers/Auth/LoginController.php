@@ -20,6 +20,14 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    public function indexAlternative()
+    {
+        if(Auth::guest()){
+            return view('auth.loginAlternative');
+        }
+        return redirect()->route('home');
+    }
+
     /**
      * Redirect the user to the GitHub authentication page.
      *
@@ -41,7 +49,7 @@ class LoginController extends Controller
 
         if(!isset($userGoogle->user['domain'])){
             return redirect()->route('index')->withErrors([
-                'message' => '⚠ La cuenta '.$userGoogle->email.' no es cooporativa'
+                'message' => '⚠ La cuenta '.$userGoogle->email.' no es corporativa'
             ]);
         }
 
@@ -53,6 +61,7 @@ class LoginController extends Controller
 
         $user = User::where([
             ['email', '=', $userGoogle->email],
+            ['status_id', '=', 1],
         ])->first();
 
         if($user != null){
@@ -74,7 +83,39 @@ class LoginController extends Controller
              return redirect()->route('home');
         }else{
             return redirect()->route('index')->withErrors([
-                'message' => '⚠ La cuenta no sea registrado por el administrador'
+                'message' => '⚠ La cuenta no sea registrado por el administrador o no esta activa'
+            ]);
+        }
+    }
+
+    public function loginAlternative(Request $request)
+    {
+        $this->validate($request, [
+           'email' => 'required|email|exists:users,email',
+           'password' => 'required|string'
+        ]);
+
+         $user = User::where([
+             ['email', '=', $request->input('email')],
+             ['status_id', '=', 1],
+         ])->first();
+
+         if($user === null){
+             return redirect()->route('indexAlternative')->withErrors([
+                 'message' => '⚠ El usuario esta inactivo'
+             ]);
+         }
+
+        $userDara = array(
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        );
+
+        if(Auth::attempt($userDara)){
+            return redirect()->route('home');
+        }else{
+            return redirect()->route('indexAlternative')->withErrors([
+                'message' => '⚠ Las credenciales no son validas'
             ]);
         }
     }

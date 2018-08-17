@@ -15,14 +15,13 @@ class CreateMenuItemsTable extends Migration
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('menu_id',false,true);
+            $table->integer('application_id',false,true);
             $table->string('title');
+            $table->string('icon');
             $table->string('route');
-            $table->integer('parent_id',false,true);
             $table->integer('order',false,true);
             $table->timestamps();
-
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('application_id')->references('id')->on('applications');
         });
     }
 
@@ -34,7 +33,7 @@ class CreateMenuItemsTable extends Migration
     public function down()
     {
         Schema::table('menu_items', function (Blueprint $table) {
-            $table->dropForeign('menu_items_menu_id_foreign');
+            $table->dropForeign('menu_items_application_id_foreign');
         });
         Schema::dropIfExists('menu_items');
     }

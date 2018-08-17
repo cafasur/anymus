@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>CAFASUR - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -17,8 +17,8 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="text-center form-body">
-
-    @yield('content')
-
+    <div id="app" class="col-md-12">
+        @yield('content')
+    </div>
 </body>
 </html>
