@@ -66,14 +66,10 @@
                     <td colspan="6" style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td style="background: lightgrey">
-                        <strong>Hora de salida:</strong>
+                    <td style="background: lightgrey" colspan="2">
+                        <strong>Fecha y hora del permiso:</strong>
                     </td>
-                    <td>{{ $absenteeismControl->departure_time }}</td>
-                    <td style="background: lightgrey">
-                        <strong>Fecha del permiso:</strong>
-                    </td>
-                    <td>{{ $absenteeismControl->date_permission }}</td>
+                    <td colspan="2">{{ $absenteeismControl->permission_date }}</td>
                     <td rowspan="7" colspan="2" style="width: 20%; vertical-align: top; text-align: center;">Sello de radicación</td>
                 </tr>
                 <tr>

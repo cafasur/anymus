@@ -27,9 +27,9 @@
                     cancelButtonText: 'Cancelar',
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
-                        axios.put(this.route)
+                        return axios.put(this.route)
                             .then((res) => {
-                                swal({
+                                return swal({
                                     type: 'success',
                                     text: res.data.message,
                                     preConfirm: () => {
@@ -38,7 +38,7 @@
                                 })
                             })
                             .catch((err) => {
-                                swal({
+                                return swal({
                                     type: 'error',
                                     html: err.response.data.message
                                 })

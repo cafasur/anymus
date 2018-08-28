@@ -35,7 +35,7 @@
             <hr class="my-2">
             <h4 class="mb-2">Datos del permiso</h4>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                     <label for="absenteeismType">Motivo del permiso</label>
                     <select class="form-control {{ $errors->has('absenteeismType') ? 'is-invalid' : '' }}" name="absenteeismType" id="absenteeismType" required>
                         <option value="" disabled selected>Selecione una opción</option>
@@ -49,21 +49,12 @@
                         </div>
                     @endif
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="datePermission">Fecha del permiso</label>
-                    <input value="{{ old('datePermission') }}" class="form-control {{ $errors->has('datePermission') ? 'is-invalid' : '' }}" type="date" id="datePermission" name="datePermission" required>
+                <div class="form-group col-md-4">
+                    <label for="datePermission">Fecha y hora del permiso</label>
+                    <input value="{{ old('datePermission') }}" class="form-control {{ $errors->has('datePermission') ? 'is-invalid' : '' }}" type="datetime-local" id="datePermission" name="datePermission" required>
                     @if($errors->has('datePermission'))
                         <div class="invalid-tooltip">
                             {{ $errors->first('datePermission') }}
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="departureTime">Hora de salida</label>
-                    <input value="{{ old('departureTime') }}" class="form-control {{ $errors->has('departureTime') ? 'is-invalid' : '' }}" type="time" id="departureTime" name="departureTime" required>
-                    @if($errors->has('departureTime'))
-                        <div class="invalid-tooltip">
-                            {{ $errors->first('departureTime') }}
                         </div>
                     @endif
                 </div>
@@ -80,9 +71,11 @@
                 </div>
             </div>
             <div class="form-row">
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-save fa-fw"></i> Guardar
-                </button>
+                <div class="form-group col-md-9">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save fa-fw"></i> Guardar
+                    </button>
+                </div>
             </div>
             @if(session('status'))
                 @component('components.alert')

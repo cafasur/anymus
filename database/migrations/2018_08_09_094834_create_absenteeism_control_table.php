@@ -17,13 +17,12 @@ class CreateAbsenteeismControlTable extends Migration
             $table->increments('id');
             $table->integer('user_id',false,true);
             $table->integer('absenteeism_type_id',false,true);
-            $table->date('date_permission');
-            $table->time('departure_time');
-            $table->date('arrival_date')->nullable();
-            $table->time('arrival_time')->nullable();
+            $table->dateTime('permission_date');
+            $table->dateTime('arrival_date')->nullable();
             $table->string('detail_permission');
             $table->integer('status_id',false,true);
             $table->string('note')->nullable();
+            $table->float('hours_absent',false,true)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

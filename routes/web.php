@@ -57,9 +57,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/formalities/formato-ausentismo',  'FormalitiesController@form_absenteeism')->name('formalities.form_absenteeism');
     Route::get('/formalities/formato-ausentismo/show/{absenteeismControl}',  'FormalitiesController@show_form_absenteeism')->name('formalities.show_form_absenteeism');
     Route::post('/formalities/formato-ausentismo/store_form_absenteeism/{user}',  'FormalitiesController@store_form_absenteeism')->name('formalities.store_form_absenteeism');
-    Route::put('/formalities/formato-ausentismo/destroy/{absenteeismControl}',  'FormalitiesController@destroy_form_absenteeism')->name('formalities.destroy_form_absenteeism');
+    Route::post('/formalities/formato-ausentismo/store_form_absenteeism',  'FormalitiesController@store_form_absenteeism2')->name('formalities.store_form_absenteeism2');
+    Route::put('/formalities/formato-ausentismo/cancel/{absenteeismControl}',  'FormalitiesController@cancel_form_absenteeism')->name('formalities.cancel_form_absenteeism');
+    Route::put('/formalities/formato-ausentismo/refuse/{absenteeismControl}',  'FormalitiesController@refuse_form_absenteeism')->name('formalities.refuse_form_absenteeism');
     Route::put('/formalities/formato-ausentismo/approve/{absenteeismControl}',  'FormalitiesController@approve_form_absenteeism')->name('formalities.approve_form_absenteeism');
     Route::put('/formalities/formato-ausentismo/checkArrival/{absenteeismControl}',  'FormalitiesController@check_arrival_form_absenteeism')->name('formalities.check_arrival_form_absenteeism');
+    Route::put('/formalities/formato-ausentismo/confirmHoursAbsent/{absenteeismControl}',  'FormalitiesController@confirm_hours_absent_form_absenteeism')->name('formalities.confirm_hours_absent_form_absenteeism');
     Route::get('/formalities/formato-ausentismo/print/{absenteeismControl}',  'FormalitiesController@print_form_absenteeism')->name('formalities.print_form_absenteeism');
 
     Route::get('/formalities/permission-management',  'FormalitiesController@permission_management')->name('formalities.permission_management');

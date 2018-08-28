@@ -40,15 +40,11 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="id">Estado del permiso</label>
-                    <input type="text" value="{{ $absenteeismControl->status->name }}" class="form-control" id="id" disabled>
+                    <input type="text" value="{{ $absenteeismControl->status_id }} - {{ $absenteeismControl->status->name }}" class="form-control" id="id" disabled>
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="datePermission">Fecha del permiso</label>
-                    <input value="{{ $absenteeismControl->date_permission }}" class="form-control" type="date" id="datePermission" name="datePermission" disabled readonly>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="datePermission">Fecha de llegada</label>
-                    <input value="{{ $absenteeismControl->arrival_date }}" class="form-control" type="date" id="datePermission" name="datePermission" disabled readonly>
+                <div class="form-group col-md-3">
+                    <label for="datePermission">Fecha y hora del permiso</label>
+                    <input value="{{ $absenteeismControl->permission_date->format('Y-m-d\TH:i:s') }}" class="form-control" type="datetime-local" id="datePermission" name="datePermission" disabled readonly>
                 </div>
             </div>
             <div class="form-row">
@@ -58,13 +54,13 @@
                         <option value="{{ $absenteeismControl->absenteeism_type_id }}" disabled selected>{{ $absenteeismControl->absenteeism_type->name }}</option>
                     </select>
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="departureTime">Hora de salida</label>
-                    <input value="{{ $absenteeismControl->departure_time }}" class="form-control" type="time" id="departureTime" name="departureTime" disabled readonly>
+                <div class="form-group col-md-3">
+                    <label for="datePermission">Fecha y hora de llegada</label>
+                    <input value="{{ !is_null($absenteeismControl->arrival_date) ? $absenteeismControl->arrival_date->format('Y-m-d\TH:i:s') : '' }}" class="form-control" type="datetime-local" id="datePermission" name="datePermission" disabled readonly>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="ArrivalTime">Hora de llegada</label>
-                    <input value="{{ $absenteeismControl->arrival_time }}" class="form-control" type="time" id="ArrivalTime" name="ArrivalTime" disabled readonly>
+                    <label for="hoursAbsent">Horas ausentes</label>
+                    <input value="{{ $absenteeismControl->hours_absent }}" class="form-control" type="number" id="hoursAbsent" name="hoursAbsent" disabled readonly>
                 </div>
             </div>
             <div class="form-row">

@@ -16,6 +16,9 @@ class AbsenteeismStatusTableSeeder extends Seeder
             'name' => 'En espera'
         ]);
         DB::table('absenteeism_status')->insert([
+            'name' => 'Anulado'
+        ]);
+        DB::table('absenteeism_status')->insert([
             'name' => 'Rechazado'
         ]);
         DB::table('absenteeism_status')->insert([

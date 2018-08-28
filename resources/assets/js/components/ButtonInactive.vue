@@ -33,7 +33,7 @@
                     showLoaderOnConfirm: true,
                     preConfirm: (nota) => {
                         let data = {nota}
-                        axios.put(this.route, data)
+                        return axios.put(this.route, data)
                             .then((res) => {
                                 swal({
                                     type: 'warning',

@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
              ApplicationsTableSeeder::class,
              MenuItemsTableSeeder::class,
              AbsenteeismStatusTableSeeder::class,
-             AbsenteeismTypesTableSeeder::class
+             AbsenteeismTypesTableSeeder::class,
+             UserTableSeeder::class,
          ]);
     }
 }

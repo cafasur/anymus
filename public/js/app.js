@@ -52542,7 +52542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 showLoaderOnConfirm: true,
                 preConfirm: function preConfirm(nota) {
                     var data = { nota: nota };
-                    axios.put(_this.route, data).then(function (res) {
+                    return axios.put(_this.route, data).then(function (res) {
                         swal({
                             type: 'warning',
                             text: res.data.message,
@@ -52720,8 +52720,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 cancelButtonText: 'Cancelar',
                 showLoaderOnConfirm: true,
                 preConfirm: function preConfirm() {
-                    axios.put(_this.route).then(function (res) {
-                        swal({
+                    return axios.put(_this.route).then(function (res) {
+                        return swal({
                             type: 'success',
                             text: res.data.message,
                             preConfirm: function preConfirm() {
@@ -52729,7 +52729,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             }
                         });
                     }).catch(function (err) {
-                        swal({
+                        return swal({
                             type: 'error',
                             html: err.response.data.message
                         });
@@ -52856,7 +52856,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52888,29 +52888,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            errors: []
+            idAbsenteeism: '',
+            errors: [],
+            date: '',
+            hoursAbsent: 0,
+            permissionDate: '',
+            arrivalDate: ''
         };
     },
 
     methods: {
-        submit: function submit() {
+        confirmHours: function confirmHours() {
             var _this = this;
 
             swal({
-                title: '\xBF' + this.title + '?',
-                text: 'Ingrese la hora de llegada.',
+                title: 'Confirme las horas de ausentismo',
                 type: 'question',
-                html: '<input type="date" class="form-control" id="date" /><input type="time" class="form-control" id="time" />',
-                showCancelButton: true,
+                html: '<span>Horas ausente:</span><br/><br/>' + '<strong>*Este calculo no tiene encuenta los días festivos</strong><br/><br/>' + '<span>' + this.permissionDate + ' - ' + this.arrivalDate + ' = ' + this.hoursAbsent + 'hrs</span><br/><br/>' + '<input value="' + this.hoursAbsent + '" type="number" class="form-control" id="hours" />',
                 confirmButtonText: 'Continuar',
-                cancelButtonText: 'Cancelar',
                 showLoaderOnConfirm: true,
                 preConfirm: function preConfirm() {
-                    var date = document.getElementById('date').value;
-                    var time = document.getElementById('time').value;
-                    var data = { time: time, date: date };
-                    axios.put(_this.route, data).then(function (res) {
-                        swal({
+                    var hoursAbsent = document.getElementById('hours').value;
+                    var data = { hoursAbsent: hoursAbsent };
+                    return axios.put('/formalities/formato-ausentismo/confirmHoursAbsent/' + _this.idAbsenteeism, data).then(function (res) {
+                        return swal({
                             type: 'success',
                             text: res.data.message,
                             preConfirm: function preConfirm() {
@@ -52918,19 +52919,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             }
                         });
                     }).catch(function (err) {
-                        _this.errors = err.response.data.errors;
-                        var messages = Object.keys(_this.errors).map(function (key) {
-                            return '<span>' + _this.errors[key][0] + '</span><br>';
+                        var messages = [];
+                        if (err.response.data.errors === null || err.response.data.errors === undefined) {
+                            messages.push(err.response.data.message);
+                        } else {
+                            _this.errors = err.response.data.errors;
+                            messages = Object.keys(_this.errors).map(function (key) {
+                                return '<span>' + _this.errors[key][0] + '</span><br>';
+                            });
+                        }
+                        return swal({
+                            type: 'error',
+                            width: 650,
+                            showCancelButton: true,
+                            cancelButtonText: 'Continuar',
+                            showConfirmButton: false,
+                            html: messages.toString(),
+                            preConfirm: function preConfirm() {
+                                location.reload();
+                            }
                         });
-                        swal({
+                    });
+                },
+                allowOutsideClick: false
+            });
+        },
+        submit: function submit() {
+            var _this2 = this;
+
+            swal({
+                title: '\xBF' + this.title + '?',
+                type: 'question',
+                html: '<span>Ingrese la fecha y hora de llegada.</span><br /><br />' + '<input type="datetime-local" class="form-control" id="date" />',
+                showCancelButton: true,
+                confirmButtonText: 'Continuar',
+                cancelButtonText: 'Cancelar',
+                showLoaderOnConfirm: true,
+                preConfirm: function preConfirm() {
+                    _this2.date = document.getElementById('date').value;
+                    var data = { 'date': _this2.date };
+                    return axios.put(_this2.route, data).then(function (res) {
+                        _this2.hoursAbsent = res.data.hours;
+                        _this2.idAbsenteeism = res.data.idAbsenteeism;
+                        _this2.permissionDate = res.data.permission_date;
+                        _this2.arrivalDate = res.data.arrival_date;
+
+                        return swal({
+                            type: 'success',
+                            confirmButtonText: 'Continuar',
+                            text: res.data.message
+                        });
+                    }).catch(function (err) {
+                        var messages = [];
+                        if (err.response.data.errors === null || err.response.data.errors === undefined) {
+                            messages.push(err.response.data.message);
+                        } else {
+                            _this2.errors = err.response.data.errors;
+                            messages = Object.keys(_this2.errors).map(function (key) {
+                                return '<span>' + _this2.errors[key][0] + '</span><br>';
+                            });
+                        }
+
+                        return swal({
                             type: 'error',
                             width: 600,
+                            showCancelButton: true,
+                            cancelButtonText: 'Continuar',
+                            showConfirmButton: false,
                             html: messages.toString()
                         });
                     });
                 },
                 allowOutsideClick: function allowOutsideClick() {
                     return !swal.isLoading();
+                }
+            }).then(function (result) {
+                if (result.value && _this2.hoursAbsent > 0) {
+                    _this2.confirmHours();
+                } else {
+                    swal({
+                        type: 'error',
+                        width: 600,
+                        text: 'Proceso cancelado o fallido, intente nuevamente'
+                    });
+                    location.reload();
                 }
             });
         }
